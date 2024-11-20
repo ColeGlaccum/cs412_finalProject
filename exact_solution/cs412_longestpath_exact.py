@@ -16,13 +16,28 @@ import random
 
 
 def main():
-    graph = create_graph(12, 1, 10)
+    graph = create_graph(25, 1, 100)
     for node in graph:
         print(node, graph[node])
     longest_path_length, longest_path = find_longest_path(graph, 0, None, 0)
     
     print(f"Longest Path Length (by weight): {longest_path_length}")
     print(f"Longest Path: {longest_path}")
+    
+    # vertices, edges = map(int, input().split())
+    # graph = dict()
+    # for i in range(edges):
+    #     u, v, w = input().split()
+    #     w = int(w)
+
+    #     # add edge to graph, initializing if necessary
+    #     if u not in graph:
+    #         graph[u] = []
+    #     graph[u].append((v, w))
+
+    #     if v not in graph:
+    #         graph[v] = []
+    #     graph[v].append((u, w))
         
 def find_longest_path(graph, start, visited, path_length):
     if visited is None:
@@ -38,6 +53,7 @@ def find_longest_path(graph, start, visited, path_length):
             if new_length > longest_path:
                 longest_path = new_length
                 longest_path_sequence = [start] + new_path
+        print(longest_path, longest_path_sequence)        
     return longest_path, longest_path_sequence
 
 # Return an adjacency list of nodes length with e edges between them
@@ -62,7 +78,7 @@ def create_graph(n, min_w, max_w):
         adjacency_list[v2].append((v1, weight))
 
 
-    additional_edges = random.randint(0, (n * (n - 1)) // 7) #7 is just an weird number to mod so it allows for more edges without a shit ton
+    additional_edges = random.randint(0, (n * (n - 1)) // 13) #7 is just an weird number to mod so it allows for more edges without a shit ton
 
     for _ in range(additional_edges):
         v1, v2 = random.sample(range(n), 2)
