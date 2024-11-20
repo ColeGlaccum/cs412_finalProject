@@ -66,6 +66,21 @@ def find_start_vertex(graph):
     return start_vertex
 
 
+def validate_solution(graph, solution):
+    path_weight, path = solution
+    current_weight = 0
+    previous_vertex = None
+    for vertex in path:
+        if vertex not in graph:
+            return False
+        current_weight += graph[vertex][1]
+        if previous_vertex is not None:
+            if graph[previous_vertex][0] != vertex:
+                return False
+        previous_vertex = vertex
+    return current_weight == path_weight
+
+
 def main():
     # build input graph from input
     vertices, edges = map(int, input().split())
@@ -89,8 +104,12 @@ def main():
         result = (0, [])
     else:
         result = approx_longest_path(graph, start)
-    print(f"{result[0]}")
-    print(" ".join(result[1]))
+    valid = validate_solution(graph, result)
+    if valid:
+        print(f"{result[0]}")
+        print(" ".join(result[1]))
+    else:
+        print("Invalid solution")
 
 
 if __name__ == '__main__':
