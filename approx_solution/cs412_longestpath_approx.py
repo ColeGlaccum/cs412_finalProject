@@ -69,15 +69,19 @@ def find_start_vertex(graph):
 def validate_solution(graph, solution):
     path_weight, path = solution
     current_weight = 0
-    previous_vertex = None
-    for vertex in path:
+    for count, vertex in enumerate(path):
+        if count == len(path) - 1:
+            break
         if vertex not in graph:
             return False
-        current_weight += graph[vertex][1]
-        if previous_vertex is not None:
-            if graph[previous_vertex][0] != vertex:
+        for edge in graph[vertex]:
+            if count + 1 >= len(path):
                 return False
-        previous_vertex = vertex
+            if edge[0] == path[count + 1]:
+                current_weight += edge[1]
+                break
+        else:
+            return False
     return current_weight == path_weight
 
 
