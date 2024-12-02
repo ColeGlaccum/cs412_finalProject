@@ -16,7 +16,7 @@ import random
 
 
 def main():
-    graph = create_graph(25, 1, 100)
+    graph = create_graph(5, 1, 10)
     for node in graph:
         print(node, graph[node])
     longest_path_length, longest_path = find_longest_path(graph, 0, None, 0)
@@ -53,7 +53,7 @@ def find_longest_path(graph, start, visited, path_length):
             if new_length > longest_path:
                 longest_path = new_length
                 longest_path_sequence = [start] + new_path
-        print(longest_path, longest_path_sequence)        
+     
     return longest_path, longest_path_sequence
 
 # Return an adjacency list of nodes length with e edges between them
