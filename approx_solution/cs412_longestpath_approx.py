@@ -5,6 +5,10 @@
 """
 
 
+import time
+import random
+
+
 def approx_longest_path(graph, start):
     visited = set()
     queue = [start]
@@ -33,37 +37,6 @@ def approx_longest_path(graph, start):
             queue.append(greedy_node)
 
     return path_weight, path
-
-
-def find_start_vertex(graph):
-    """
-        Finds the vertex with the largest edge weight.
-        In case of a tie, the vertex with the smallest total weight is chosen in order to
-        leave other potentially high weight vertices available.
-    """
-    max_total_weight = 0
-    max_edge_weight = 0
-    start_vertex = None
-
-    for vertex in graph:
-        current_total_weight = 0
-        current_max_edge_weight = 0
-
-        for _, weight in graph[vertex]:
-            if weight > current_max_edge_weight:
-                current_max_edge_weight = weight
-            current_total_weight += weight
-
-        if current_max_edge_weight == max_edge_weight:
-            if current_total_weight < max_total_weight:
-                max_total_weight = current_total_weight
-                start_vertex = vertex
-        elif current_max_edge_weight > max_edge_weight:
-            max_edge_weight = current_max_edge_weight
-            max_total_weight = current_total_weight
-            start_vertex = vertex
-
-    return start_vertex
 
 
 def validate_solution(graph, solution):
@@ -103,17 +76,22 @@ def main():
         graph[v].append((u, w))
 
     # run algorithm
-    start = find_start_vertex(graph)
-    if start is None:
-        result = (0, [])
-    else:
-        result = approx_longest_path(graph, start)
-    valid = validate_solution(graph, result)
-    if valid:
-        print(f"{result[0]}")
-        print(" ".join(result[1]))
-    else:
-        print("Invalid solution")
+    t_end = time.time() + 60 * 1
+    solution = (0, [])
+    while time.time() < t_end:
+        start = random.choice(list(graph.keys()))
+        if start is None:
+            result = (0, [])
+        else:
+            result = approx_longest_path(graph, start)
+            valid = validate_solution(graph, result)
+            if not valid:
+                continue
+        if result[0] > solution[0]:
+            solution = result
+
+    print(f"{solution[0]}")
+    print(" ".join(solution[1]))
 
 
 if __name__ == '__main__':
