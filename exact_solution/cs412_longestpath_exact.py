@@ -12,40 +12,7 @@
 
 # All modules for CS 412 must include a main method that allows it
 # to imported and invoked from other python scripts
-import random
-
-
-def main():
-    # graph = create_graph(5, 1, 10)
-    # for node in graph:
-    #     print(node, graph[node])
-    # longest_path_length, longest_path = find_longest_path(graph, 0, None, 0)
-    
-    # print(f"Longest Path Length (by weight): {longest_path_length}")
-    # print(f"Longest Path: {longest_path}")
-    
-    vertices, edges = map(int, input().split())
-    graph = dict()
-    for i in range(edges):
-        u, v, w = input().split()
-        w = int(w)
-
-        # add edge to graph, initializing if necessary
-        if u not in graph:
-            graph[u] = []
-        graph[u].append((v, w))
-
-        if v not in graph:
-            graph[v] = []
-        graph[v].append((u, w))
-
-    longest_path_length, longest_path = find_longest_path(graph)
-    
-    print(longest_path_length)
-    print(" ".join(longest_path))
-        
-import random
-
+import random 
 
 def main():
     # graph = create_graph(5, 1, 10)
@@ -94,18 +61,6 @@ def find_longest_path_dfs(graph, start, visited, path_length):
     return longest_path, longest_path_sequence
 
 def find_longest_path(graph):
-    max_path = 0
-    max_sequence = []
-    for v in graph.keys():
-        path, path_sequence = find_longest_path_dfs(graph, v, None, 0)
-        if path > max_path:
-            max_path = path
-            max_sequence = path_sequence
-    return max_path, max_sequence
-def find_longest_path(graph):
-    if not graph:
-        return 0, []
-    
     max_path = 0
     max_sequence = []
     for v in graph.keys():
