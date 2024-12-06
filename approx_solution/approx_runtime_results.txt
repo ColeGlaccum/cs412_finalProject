@@ -1,0 +1,102 @@
+Running test case: ./test_cases/input_05_vertices.txt
+Exact solution:
+24
+a c b d e
+
+real	0m0.127s
+user	0m0.000s
+sys	0m0.000s
+
+Approximate solution:
+24
+e d b c a
+
+real	0m0.107s
+user	0m0.000s
+sys	0m0.000s
+-------------------------
+Running test case: ./test_cases/input_10_vertices.txt
+Exact solution:
+55
+a e c b d f g h i j
+
+real	0m0.102s
+user	0m0.000s
+sys	0m0.000s
+
+Approximate solution:
+55
+j i h g f d b c e a
+
+real	0m0.108s
+user	0m0.000s
+sys	0m0.031s
+-------------------------
+Running test case: ./test_cases/input_15_vertices.txt
+Exact solution:
+107
+a c e b d f g h i j k l m n o p q r s t
+
+real	0m0.112s
+user	0m0.015s
+sys	0m0.031s
+
+Approximate solution:
+107
+a c e b d f g h i j k l m n o p q r s t
+
+real	0m0.102s
+user	0m0.015s
+sys	0m0.016s
+-------------------------
+Running test case: ./test_cases/input_20_vertices.txt
+Exact solution:
+144
+a c e b d f g h i j k l m n o p q r s t u v w x y z
+
+real	0m0.261s
+user	0m0.000s
+sys	0m0.031s
+
+Approximate solution:
+102
+j g h i k l m n o p q r s t u v w x y z
+
+real	0m0.107s
+user	0m0.000s
+sys	0m0.000s
+-------------------------
+Running test case: ./test_cases/input_25_vertices.txt
+Exact solution:
+147
+e c f h j i g b d a z y x w v u t s r q p o n m l k
+
+real	0m1.184s
+user	0m0.000s
+sys	0m0.000s
+
+Approximate solution:
+147
+e c f h j i g b d a z y x w v u t s r q p o n m l k
+
+real	0m0.142s
+user	0m0.000s
+sys	0m0.015s
+-------------------------
+Running test case: ./test_cases/input_30_vertices.txt
+Exact solution:
+128
+b h c j e k a g i d f
+
+real	0m51.934s
+user	0m0.000s
+sys	0m0.031s
+
+Approximate solution:
+125
+k e h b d f c a g i j
+
+real	0m0.112s
+user	0m0.015s
+sys	0m0.000s
+-------------------------
