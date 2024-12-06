@@ -1,21 +1,16 @@
-"""
-This implementation demonstrates why the Bellman-Ford algorithm fails to solve the Longest Path problem
-by negating edge weights. Specifically, it fails in graphs with cycles.
 
+"""
+Augment to show why the Bellman-Ford algorithm fails to solve the Longest Path problem
+by negating edge weights.
 Author: Cole Glaccum
 """
 
-def bellman_ford(graph, src):
+def bellman_ford(vertices, edges, src):
     # Init
-    vertices = list(graph.keys())
-    edges = []
-    for u in graph:
-        for v, w in graph[u]:
-            edges.append((u, v, w))
-    dist = {v: float('inf') for v in range(vertices)}
+    dist = [float('inf')] * vertices
     dist[src] = 0
 
-    # Relax all edges |V| - 1 times
+    # Relax all edges V - 1 times
     for _ in range(vertices - 1):
         for u, v, weight in edges:
             if dist[u] != float('inf') and dist[u] + weight < dist[v]:
@@ -30,35 +25,37 @@ def bellman_ford(graph, src):
     return dist
 
 def main():
-    # Take graph input from the user
-    vertices, edges = map(int, input().split())
-    
-    graph = dict()
+    # Init graph
+    n, m = map(int, input().split())
+    vertices = {}
     edge_list = []
 
-    for _ in range(edges):
+    # Read edges
+    for i in range(m):
         u, v, w = input().split()
         w = int(w)
+        
+        # Map vertex labels to indices
+        if u not in vertices:
+            vertices[u] = len(vertices)
+        if v not in vertices:
+            vertices[v] = len(vertices)
 
-        # add edge to graph, initializing if necessary
-        if u not in graph:
-            graph[u] = []
-        graph[u].append((v, w))
+        u_idx = vertices[u]
+        v_idx = vertices[v]
 
-        if v not in graph:
-            graph[v] = []
-        graph[v].append((u, w))
+        # Add both directions bc its undirected
+        edge_list.append((u_idx, v_idx, w))
+        edge_list.append((v_idx, u_idx, w))
 
     # Negate edge weights
     negated_edges = [(u, v, -weight) for u, v, weight in edge_list]
 
-    # Run Bellman-Ford on the negated graph
-    result = bellman_ford(graph, 0)
+    # Run on the negated graph
+    result = bellman_ford(len(vertices), negated_edges, 0) # Start at 0, ig
 
     if result is not None:
-        print("Longest path distances in the original graph:", result)
-    else:
-        print("The algorithm failed due to negative-weight cycles.")
+        print("Distances in the negated graph:", result)
 
 if __name__ == "__main__":
     main()
