@@ -41,7 +41,7 @@ def main():
     longest_path_length, longest_path = find_longest_path(graph)
     
     print(longest_path_length)
-    print(" ".join(longest_path))
+    print(" ".join(str(x) for x in longest_path))
         
 def find_longest_path_dfs(graph, start, visited, path_length):
     if visited is None:
@@ -51,7 +51,7 @@ def find_longest_path_dfs(graph, start, visited, path_length):
     longest_path = path_length
     longest_path_sequence = [start]
     
-    for neighbor, weight in graph[start]:
+    for neighbor, weight in sorted(graph[start]):
         if neighbor not in visited:
             new_length, new_path = find_longest_path_dfs(graph, neighbor, visited.copy(), path_length + weight)
             if new_length > longest_path:
@@ -92,7 +92,7 @@ def create_graph(n, min_w, max_w):
         adjacency_list[v2].append((v1, weight))
 
 
-    additional_edges = random.randint(0, (n * (n - 1)) // 13) #7 is just an weird number to mod so it allows for more edges without a shit ton
+    additional_edges = random.randint(0, (n * (n - 1)) // 13) #7 is just an weird number to mod so it allows for more edges without a lot
 
     for _ in range(additional_edges):
         v1, v2 = random.sample(range(n), 2)
