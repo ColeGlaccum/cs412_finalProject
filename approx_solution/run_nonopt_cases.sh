@@ -1,7 +1,7 @@
 #!/bin/bash
 
 SCRIPT_DIR="./"
-TEST_CASE_DIR="./test_cases/input6.txt"
+TEST_CASE_DIR="./test_cases/input_nonoptimal.txt"
 
 echo "Running non-optimal case"
 
